@@ -145,3 +145,6 @@ WHERE NOT EXISTS (SELECT 1 FROM waste_categories WHERE category_name = 'Anorgani
 INSERT INTO waste_categories (category_name, price_per_kg, description)
 SELECT 'B3', 10000, 'Sampah bahan berbahaya dan beracun'
 WHERE NOT EXISTS (SELECT 1 FROM waste_categories WHERE category_name = 'B3');
+
+-- Ensure legacy column used by UI exists
+ALTER TABLE user_notifications ADD COLUMN IF NOT EXISTS read_at TIMESTAMP NULL DEFAULT NULL;
