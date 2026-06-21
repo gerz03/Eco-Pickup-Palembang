@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS pickup_requests (
     pickup_date DATE NOT NULL,
     pickup_time TIME NOT NULL,
     payment_method ENUM('QRIS', 'DANA', 'OVO', 'GoPay', 'Transfer Bank', 'COD') NOT NULL,
-    request_status ENUM('PENDING', 'DIJEMPUT', 'SELESAI', 'DIBATALKAN') NOT NULL DEFAULT 'PENDING',
+    request_status ENUM('Menunggu', 'Diproses', 'Terangkut', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
     FOREIGN KEY (officer_id) REFERENCES officers(officer_id) ON DELETE SET NULL
