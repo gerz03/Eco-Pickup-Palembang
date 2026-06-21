@@ -1,0 +1,14 @@
+{
+  "name": "bank-sampah/aplikasi-rpl",
+  "description": "Aplikasi Bank Sampah Palembang",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}

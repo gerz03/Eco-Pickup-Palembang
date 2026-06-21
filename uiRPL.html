@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoPickup Palembang</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="ui.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-bold" href="uiRPL.html">
+<i class="fa-solid fa-recycle me-2"></i>EcoPickup Palembang
+</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="mainNav">
+<div class="navbar-nav ms-lg-4">
+<a class="nav-link" href="#layanan">Layanan</a>
+<a class="nav-link" href="#form-penjemputan">Ajukan</a>
+<a class="nav-link" href="#alur">Alur</a>
+</div>
+<div class="nav-action ms-lg-auto mt-3 mt-lg-0">
+<a class="btn btn-outline-light btn-sm" href="auth/login.php"><i class="fa-solid fa-right-to-bracket me-1"></i>Login</a>
+<a class="btn btn-light btn-sm" href="auth/register.php"><i class="fa-solid fa-user-plus me-1"></i>Register</a>
+</div>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<div class="row align-items-center g-5">
+<div class="col-lg-7">
+<div class="section-kicker text-white">Layanan kebersihan digital Palembang</div>
+<h1>Sistem Penjemputan Sampah Tepat Waktu</h1>
+<p class="mt-3">
+Ajukan penjemputan, hitung tarif otomatis, pantau status, dan selesaikan pembayaran dalam satu alur yang sederhana.
+</p>
+<div class="hero-tools">
+<a class="btn btn-light btn-lg" href="#form-penjemputan"><i class="fa-solid fa-truck-fast me-2"></i>Ajukan Penjemputan</a>
+<a class="btn btn-outline-light btn-lg" href="dashboard.php"><i class="fa-solid fa-list-check me-2"></i>Lihat Dashboard</a>
+</div>
+<div class="hero-note">
+<i class="fa-solid fa-clock"></i>
+<span>Jadwal fleksibel, tarif transparan, status selalu tercatat.</span>
+</div>
+</div>
+<div class="col-lg-5 text-center">
+<img src="https://cdn-icons-png.flaticon.com/512/3082/3082037.png" class="img-fluid hero-img" alt="Ilustrasi armada penjemputan sampah">
+</div>
+</div>
+</div>
+</section>
+
+<section class="section-band">
+<div class="container">
+<div class="row g-4">
+<div class="col-md-3"><div class="stat-card"><h3>3.500+</h3><p class="mb-0">Pelanggan</p></div></div>
+<div class="col-md-3"><div class="stat-card"><h3>95%</h3><p class="mb-0">Tepat Waktu</p></div></div>
+<div class="col-md-3"><div class="stat-card"><h3>45</h3><p class="mb-0">Armada</p></div></div>
+<div class="col-md-3"><div class="stat-card"><h3>120 Ton</h3><p class="mb-0">Sampah/Bulan</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section-band section-muted" id="layanan">
+<div class="container">
+<div class="text-center mb-4">
+<div class="section-kicker">Layanan</div>
+<h2 class="section-title mb-2">Satu Sistem untuk Operasional Sampah</h2>
+<p class="text-muted mb-0">Dibuat untuk warga, petugas, dan admin agar proses penjemputan lebih tertata.</p>
+</div>
+<div class="row g-4">
+<div class="col-md-3"><div class="service-card"><i class="fa-solid fa-truck"></i><h5>Penjemputan</h5><p class="text-muted mb-0">Pesan jadwal sesuai lokasi dan kebutuhan.</p></div></div>
+<div class="col-md-3"><div class="service-card"><i class="fa-solid fa-location-dot"></i><h5>Status Armada</h5><p class="text-muted mb-0">Admin dapat memperbarui status pickup.</p></div></div>
+<div class="col-md-3"><div class="service-card"><i class="fa-solid fa-wallet"></i><h5>Pembayaran</h5><p class="text-muted mb-0">QRIS, e-wallet, transfer, atau COD.</p></div></div>
+<div class="col-md-3"><div class="service-card"><i class="fa-solid fa-chart-line"></i><h5>Laporan</h5><p class="text-muted mb-0">Data pengguna, permintaan, dan transaksi.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section-band" id="form-penjemputan">
+<div class="container">
+<div class="card form-card">
+<div class="card-body">
+<div class="form-heading">
+<div>
+<div class="section-kicker">Form Penjemputan</div>
+<h2 class="mb-2">Ajukan Penjemputan Sampah</h2>
+<p class="text-muted mb-0">Isi data berikut. Sistem akan menghitung estimasi tarif dari jenis sampah, berat, dan jarak lokasi.</p>
+</div>
+<a class="btn btn-outline-success" href="dashboard.php"><i class="fa-solid fa-clock-rotate-left me-1"></i>Riwayat & Ubah Pesanan</a>
+</div>
+
+<form method="post" action="proses_penjemputan.php" enctype="multipart/form-data" class="needs-validation" novalidate>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label">Nama Lengkap</label>
+<input type="text" name="full_name" class="form-control" placeholder="Nama pelanggan" required>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label">No HP</label>
+<input type="text" name="phone_number" class="form-control" placeholder="08xxxxxxxxxx" required>
+</div>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Alamat Penjemputan</label>
+<textarea name="pickup_address" class="form-control" rows="3" placeholder="Tulis alamat lengkap di Palembang" required></textarea>
+<div class="invalid-feedback">Alamat wajib diisi.</div>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Catatan Tambahan</label>
+<textarea name="notes" class="form-control" rows="2" maxlength="500" placeholder="Contoh: sampah diletakkan di depan pagar"></textarea>
+</div>
+
+<div class="row">
+<div class="col-md-4 mb-3">
+<label class="form-label">Jenis Sampah</label>
+<select class="form-control" id="jenis" name="waste_price" onchange="hitungTarif()">
+<option value="3000">Organik - Rp 3.000/Kg</option>
+<option value="5000">Anorganik - Rp 5.000/Kg</option>
+<option value="10000">B3 - Rp 10.000/Kg</option>
+</select>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">Berat Sampah (Kg)</label>
+<input type="number" id="berat" name="weight_kg" class="form-control" min="0.1" step="0.1" placeholder="Contoh: 5" required oninput="hitungTarif()">
+<div class="invalid-feedback">Berat wajib lebih dari 0.</div>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">Jarak (Km)</label>
+<input type="number" id="jarak" name="distance_km" class="form-control" min="0.1" step="0.1" placeholder="Contoh: 3.5" required oninput="hitungTarif()">
+<div class="invalid-feedback">Jarak wajib lebih dari 0.</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-4 mb-3">
+<label class="form-label">Foto Sampah</label>
+<input type="file" name="waste_photo" class="form-control" accept="image/jpeg,image/png,image/webp">
+<div class="form-text">Opsional. JPG, PNG, atau WebP. Maksimal 2MB.</div>
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">Tanggal Penjemputan</label>
+<input type="date" name="pickup_date" required class="form-control">
+</div>
+<div class="col-md-4 mb-3">
+<label class="form-label">Jam Penjemputan</label>
+<input type="time" name="pickup_time" required class="form-control">
+</div>
+</div>
+
+<div class="row align-items-end">
+<div class="col-md-6 mb-3">
+<label class="form-label">Metode Pembayaran</label>
+<select class="form-control" name="payment_method" id="payment_method" required onchange="showQRIS()">
+<option value="" disabled selected>Pilih metode</option>
+<option>QRIS</option>
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>Transfer Bank</option>
+<option>COD</option>
+</select>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label">Total Tarif</label>
+<input type="text" id="totalTarif" readonly class="form-control tarif-box">
+</div>
+</div>
+
+<!-- Container QRIS -->
+<div id="qris_container" class="mb-4 text-center d-none">
+    <div class="card border-success bg-light shadow-sm">
+        <div class="card-body">
+            <h6 class="fw-bold text-success mb-3"><i class="fa-solid fa-qrcode me-2"></i>Scan QRIS untuk Pembayaran</h6>
+            <img id="qris_image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=EcoPickup_Palembang" alt="QRIS Code" class="img-fluid rounded mb-2" style="max-width: 200px;">
+            <p class="small text-muted mb-0">Silakan scan dan lakukan pembayaran sesuai total tarif sebelum mengirim permintaan.</p>
+        </div>
+    </div>
+</div>
+
+<button type="submit" id="kirimPermintaan" class="btn btn-success btn-lg w-100">
+<i class="fa-solid fa-paper-plane me-2"></i>Kirim Permintaan
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section-band section-muted" id="alur">
+<div class="container">
+<div class="text-center mb-4">
+<div class="section-kicker">Alur Status</div>
+<h2 class="section-title mb-2">Proses Penjemputan yang Terpantau</h2>
+</div>
+<div class="tracking">
+<div class="step active"><i class="fa-solid fa-inbox me-2"></i>Pesanan Diterima</div>
+<div class="step active"><i class="fa-solid fa-truck me-2"></i>Armada Berangkat</div>
+<div class="step"><i class="fa-solid fa-route me-2"></i>Menuju Lokasi</div>
+<div class="step"><i class="fa-solid fa-circle-check me-2"></i>Selesai</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="row align-items-center g-3">
+<div class="col-md-6">
+<h4>EcoPickup Palembang</h4>
+<p class="mb-0">Palembang Bersih - Tepat Waktu - Ramah Lingkungan</p>
+</div>
+<div class="col-md-6 text-md-end">
+<a class="btn btn-outline-light btn-sm" href="admin/dashboard.php">Admin</a>
+<a class="btn btn-light btn-sm" href="auth/login.php">Login</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="pembayar.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+function showQRIS() {
+    const method = document.getElementById('payment_method').value;
+    const container = document.getElementById('qris_container');
+    const total = document.getElementById('totalTarif').value;
+    const qrisImg = document.getElementById('qris_image');
+
+    if (method === 'QRIS') {
+        container.classList.remove('d-none');
+        // Opsional: Masukkan nominal ke dalam QR (hanya simulasi teks)
+        const nominal = total.replace(/\D/g, '');
+        qrisImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=EcoPickup_Bayar_Rp${nominal}`;
+    } else {
+        container.classList.add('d-none');
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+USE bank_sampah_palembang;
+
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS google_id VARCHAR(120) UNIQUE DEFAULT NULL AFTER email,
+ADD COLUMN IF NOT EXISTS auth_provider ENUM('LOCAL', 'GOOGLE') NOT NULL DEFAULT 'LOCAL' AFTER password_hash;
