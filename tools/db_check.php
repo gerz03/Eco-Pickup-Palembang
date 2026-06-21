@@ -24,4 +24,12 @@ $res2 = $mysqli->query("SHOW TABLES LIKE 'user_notifications'");
 $exists = ($res2 && $res2->num_rows > 0) ? 'YES' : 'NO';
 echo "\nuser_notifications exists: $exists\n";
 
+if ($exists === 'YES') {
+    echo "\nColumns in user_notifications:\n";
+    $cols = $mysqli->query("SHOW COLUMNS FROM user_notifications");
+    while ($c = $cols->fetch_assoc()) {
+        echo sprintf(" - %s %s%s\n", $c['Field'], $c['Type'], ($c['Null'] === 'NO' ? ' NOT NULL' : ''));
+    }
+}
+
 $mysqli->close();
