@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 CREATE TABLE IF NOT EXISTS notifications (
-    notification_id CHAR(15) PRIMARY KEY,
+    notification_id CHAR(18) PRIMARY KEY,
     recipient_id CHAR(8) NOT NULL,
     channel ENUM('EMAIL', 'SMS') NOT NULL,
     status ENUM('SENT', 'FAILED', 'PENDING') NOT NULL DEFAULT 'PENDING',
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 -- compatibility table used by legacy code: user_notifications
 CREATE TABLE IF NOT EXISTS user_notifications (
-    notification_id CHAR(15) PRIMARY KEY,
+    notification_id CHAR(18) PRIMARY KEY,
     recipient_id CHAR(8) NOT NULL,
     request_id INT DEFAULT NULL,
     title VARCHAR(200) NOT NULL,
