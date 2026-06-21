@@ -89,6 +89,19 @@ CREATE TABLE IF NOT EXISTS notifications (
     FOREIGN KEY (recipient_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+-- compatibility table used by legacy code: user_notifications
+CREATE TABLE IF NOT EXISTS user_notifications (
+    notification_id CHAR(15) PRIMARY KEY,
+    recipient_id CHAR(8) NOT NULL,
+    request_id INT DEFAULT NULL,
+    title VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    link_url VARCHAR(255) DEFAULT 'notifikasi.php',
+    status ENUM('SENT','FAILED','PENDING') NOT NULL DEFAULT 'PENDING',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (recipient_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS pickup_requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id CHAR(8) DEFAULT NULL,
