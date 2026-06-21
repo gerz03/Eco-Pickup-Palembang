@@ -138,6 +138,22 @@ CREATE TABLE IF NOT EXISTS pickup_transactions (
     FOREIGN KEY (request_id) REFERENCES pickup_requests(request_id) ON DELETE CASCADE
 );
 
+-- Ensure request_status enum includes legacy and new values, then normalize into the app's expected statuses.
+ALTER TABLE pickup_requests
+    MODIFY request_status ENUM('PENDING', 'DIJEMPUT', 'SELESAI', 'DIBATALKAN', 'Menunggu', 'Diproses', 'Terangkut', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu';
+
+UPDATE pickup_requests
+SET request_status = CASE request_status
+    WHEN 'PENDING' THEN 'Menunggu'
+    WHEN 'DIJEMPUT' THEN 'Terangkut'
+    WHEN 'SELESAI' THEN 'Selesai'
+    WHEN 'DIBATALKAN' THEN 'Dibatalkan'
+    ELSE request_status
+END;
+
+ALTER TABLE pickup_requests
+    MODIFY request_status ENUM('Menunggu', 'Diproses', 'Terangkut', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu';
+
 INSERT INTO waste_categories (category_name, price_per_kg, description)
 SELECT 'Organik', 3000, 'Sampah mudah terurai'
 WHERE NOT EXISTS (SELECT 1 FROM waste_categories WHERE category_name = 'Organik');
