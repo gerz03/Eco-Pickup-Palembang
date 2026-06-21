@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS pickup_requests (
     full_name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     pickup_address TEXT NOT NULL,
+    officer_id CHAR(8) DEFAULT NULL,
     waste_type ENUM('Organik', 'Anorganik', 'B3') NOT NULL,
     price_per_kg INT NOT NULL,
     weight_kg DECIMAL(8, 2) NOT NULL,
@@ -119,7 +120,8 @@ CREATE TABLE IF NOT EXISTS pickup_requests (
     payment_method ENUM('QRIS', 'DANA', 'OVO', 'GoPay', 'Transfer Bank', 'COD') NOT NULL,
     request_status ENUM('PENDING', 'DIJEMPUT', 'SELESAI', 'DIBATALKAN') NOT NULL DEFAULT 'PENDING',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (officer_id) REFERENCES officers(officer_id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS pickup_transactions (
