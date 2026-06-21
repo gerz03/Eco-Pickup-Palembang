@@ -61,7 +61,7 @@ $completedStmt = mysqli_prepare(
      FROM pickup_requests r
      LEFT JOIN users u ON u.user_id = r.user_id
      WHERE r.officer_id = ? AND r.request_status = 'Selesai'
-     ORDER BY r.updated_at DESC
+     ORDER BY r.pickup_date DESC
      LIMIT 10"
 );
 mysqli_stmt_bind_param($completedStmt, "s", $user["user_id"]);
