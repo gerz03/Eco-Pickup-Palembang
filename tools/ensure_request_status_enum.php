@@ -13,10 +13,10 @@ if ($mysqli->connect_errno) {
     exit(1);
 }
 
-// First ensure the column can hold both legacy and new values.
-$sqlExpand = "ALTER TABLE pickup_requests MODIFY request_status ENUM('PENDING', 'DIJEMPUT', 'SELESAI', 'DIBATALKAN', 'Menunggu', 'Diproses', 'Terangkut', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu'";
-if (!$mysqli->query($sqlExpand)) {
-    echo "Failed to expand request_status enum: " . $mysqli->error . "\n";
+// Convert request_status to a temporary VARCHAR so we can normalize values safely.
+$sqlVarchar = "ALTER TABLE pickup_requests MODIFY request_status VARCHAR(20) NOT NULL DEFAULT 'Menunggu'";
+if (!$mysqli->query($sqlVarchar)) {
+    echo "Failed to convert request_status to VARCHAR: " . $mysqli->error . "\n";
     $mysqli->close();
     exit(1);
 }

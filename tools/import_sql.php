@@ -43,6 +43,10 @@ $parts = array_filter(array_map('trim', explode(';', $sql)));
 $errors = [];
 foreach ($parts as $part) {
     if ($part === '') continue;
+    if (preg_match('/ALTER\s+TABLE\s+.*ADD\s+COLUMN\s+IF\s+NOT\s+EXISTS/i', $part)) {
+        echo "Skipping unsupported legacy statement: " . trim(preg_replace('/\s+/', ' ', $part)) . "\n";
+        continue;
+    }
     $query = $part . ';';
     if (!$mysqli->query($query)) {
         $errors[] = [ 'error' => $mysqli->error, 'query' => substr($part, 0, 200) ];
