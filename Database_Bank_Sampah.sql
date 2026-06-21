@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS pickup_transactions (
     total_weight_kg DECIMAL(8, 2) NOT NULL,
     total_amount INT NOT NULL,
     payment_method ENUM('QRIS', 'DANA', 'OVO', 'GoPay', 'Transfer Bank', 'COD') NOT NULL,
-    payment_status ENUM('BELUM BAYAR', 'LUNAS') NOT NULL DEFAULT 'LUNAS',
+    payment_status ENUM('PENDING', 'LUNAS', 'BATAL') NOT NULL DEFAULT 'PENDING',
     transaction_note TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (request_id) REFERENCES pickup_requests(request_id) ON DELETE CASCADE
