@@ -22,8 +22,7 @@ RUN mkdir -p /app/uploads/waste && \
 RUN chmod -R 755 /app
 
 # Enable error reporting for debugging
-RUN echo "display_errors = On" >> /etc/php/*/cli/php.ini && \
-    echo "error_log = /dev/stderr" >> /etc/php/*/cli/php.ini
+RUN find /etc/php* -name "php.ini" -exec sh -c 'echo "display_errors = On" >> "$1"; echo "error_log = /dev/stderr" >> "$1"' _ {} \; || true
 
 # Expose port
 EXPOSE 8080
