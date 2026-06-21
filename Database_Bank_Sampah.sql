@@ -108,6 +108,8 @@ CREATE TABLE IF NOT EXISTS pickup_requests (
     full_name VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     pickup_address TEXT NOT NULL,
+    notes TEXT DEFAULT NULL,
+    photo_path VARCHAR(255) DEFAULT NULL,
     officer_id CHAR(8) DEFAULT NULL,
     waste_type ENUM('Organik', 'Anorganik', 'B3') NOT NULL,
     price_per_kg INT NOT NULL,
