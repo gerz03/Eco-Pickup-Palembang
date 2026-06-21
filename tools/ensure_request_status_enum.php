@@ -13,7 +13,15 @@ if ($mysqli->connect_errno) {
     exit(1);
 }
 
-// Update old values to the new application status values if needed.
+// First ensure the column can hold both legacy and new values.
+$sqlExpand = "ALTER TABLE pickup_requests MODIFY request_status ENUM('PENDING', 'DIJEMPUT', 'SELESAI', 'DIBATALKAN', 'Menunggu', 'Diproses', 'Terangkut', 'Selesai', 'Dibatalkan') NOT NULL DEFAULT 'Menunggu'";
+if (!$mysqli->query($sqlExpand)) {
+    echo "Failed to expand request_status enum: " . $mysqli->error . "\n";
+    $mysqli->close();
+    exit(1);
+}
+
+// Normalize legacy values to the updated application values.
 $updateOld = "UPDATE pickup_requests SET request_status = CASE request_status
     WHEN 'PENDING' THEN 'Menunggu'
     WHEN 'DIJEMPUT' THEN 'Terangkut'
