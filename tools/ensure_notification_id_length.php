@@ -15,11 +15,27 @@ if ($mysqli->connect_errno) {
 
 $tables = ['notifications', 'user_notifications'];
 foreach ($tables as $table) {
-    $sql = "ALTER TABLE $table MODIFY notification_id CHAR(18) PRIMARY KEY";
-    if ($mysqli->query($sql)) {
-        echo "Updated $table.notification_id to CHAR(18).\n";
+    // Drop primary key constraint
+    if ($mysqli->query("ALTER TABLE $table DROP PRIMARY KEY")) {
+        echo "Dropped PRIMARY KEY constraint on $table.\n";
     } else {
-        echo "Failed to update $table.notification_id: " . $mysqli->error . "\n";
+        echo "Failed to drop PRIMARY KEY on $table: " . $mysqli->error . "\n";
+        continue;
+    }
+    
+    // Modify column type
+    if ($mysqli->query("ALTER TABLE $table MODIFY notification_id CHAR(18)")) {
+        echo "Modified $table.notification_id to CHAR(18).\n";
+    } else {
+        echo "Failed to modify $table.notification_id: " . $mysqli->error . "\n";
+        continue;
+    }
+    
+    // Re-add primary key constraint
+    if ($mysqli->query("ALTER TABLE $table ADD PRIMARY KEY (notification_id)")) {
+        echo "Re-added PRIMARY KEY constraint on $table.\n";
+    } else {
+        echo "Failed to re-add PRIMARY KEY on $table: " . $mysqli->error . "\n";
     }
 }
 
