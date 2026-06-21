@@ -1,12 +1,13 @@
 FROM php:8.1-cli
 
-# Install required PHP extensions
+# Install required PHP extensions and tools
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    zip \
+    unzip \
     && docker-php-ext-install mysqli pdo pdo_mysql \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -14,18 +15,18 @@ WORKDIR /app
 # Copy application files
 COPY . .
 
-# Create uploads directory if needed
+# Create necessary directories with proper permissions
 RUN mkdir -p /app/uploads/waste && \
-    chmod -R 755 /app/uploads
+    mkdir -p /app/logs && \
+    chmod -R 755 /app && \
+    chmod -R 777 /app/uploads && \
+    chmod -R 777 /app/logs
 
-# Set proper permissions
-RUN chmod -R 755 /app
-
-# Enable error reporting for debugging
-RUN find /etc/php* -name "php.ini" -exec sh -c 'echo "display_errors = On" >> "$1"; echo "error_log = /dev/stderr" >> "$1"' _ {} \; || true
+# Create .env if not exists
+RUN if [ ! -f /app/.env ]; then cp /app/.env.example /app/.env 2>/dev/null || echo "Creating minimal .env..."; fi
 
 # Expose port
 EXPOSE 8080
 
-# Start PHP built-in server
-CMD ["php", "-S", "0.0.0.0:${PORT:-8080}", "-t", "/app"]
+# Start PHP built-in server with error handling
+CMD ["sh", "-c", "echo 'Starting PHP server on port 8080...' && php -d display_errors=1 -d error_log=/dev/stderr -S 0.0.0.0:${PORT:-8080} -t /app 2>&1"]
